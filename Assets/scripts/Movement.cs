@@ -1,31 +1,36 @@
-
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class movement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputAction moveAction;
-    private VoicePitchDetector voice; 
 
     void Awake()
     {
-        
+
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
-        voice = GetComponent<VoicePitchDetector>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        VoicePitchDetector.Instance.OnPitchDetected += VoicePitchDetector_OnPitchDetected;
     }
 
     // Update is called once per frame
     void Update()
     {
         //KeyboardInput();
+    }
+    
+    private void VoicePitchDetector_OnPitchDetected(object sender, float pitch)
+    {
+        Debug.Log(pitch);
     }
 
     private void KeyboardInput()

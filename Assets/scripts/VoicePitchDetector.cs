@@ -1,12 +1,16 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class VoicePitchDetector : MonoBehaviour
 {
+    public static VoicePitchDetector Instance { get; private set; }
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float up = 500;
     [SerializeField] private string selectedMic;
     [SerializeField] private float[] spectrum = new float[1024];
+    
+    public event EventHandler<float> OnPitchDetected;
     
     // Parameters
     [SerializeField] private float minFreq = 80f;     // Ignore below this frequency
@@ -14,6 +18,17 @@ public class VoicePitchDetector : MonoBehaviour
 
     private int minIndex;
     private float detectedFreq;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("More than one VoicePitchDetector in scene!");
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -34,8 +49,11 @@ public class VoicePitchDetector : MonoBehaviour
         AnalyzeFrequencySpectrum();
         
         detectedFreq = GetDetectedFrequency();
-
-        DebugMethod();
+        
+        if (detectedFreq > 0)
+            OnPitchDetected?.Invoke(this, detectedFreq);
+        
+        //DebugMethod();
     }
 
 
@@ -96,18 +114,18 @@ public class VoicePitchDetector : MonoBehaviour
     
     private void DebugMethod()
     {
-        if (detectedFreq > 0)
-            Debug.Log(detectedFreq);
-        if (detectedFreq <
-            // Interpret frequency as commands - ???
-            100)
-        {
-        }
+        // if (detectedFreq > 0)
+        //     Debug.Log(detectedFreq);
+        if (detectedFreq < 100) ;
         else if (detectedFreq < up)
+            Debug.Log("GO LEFT");
+        else if (detectedFreq < up + 100)
+            Debug.Log("GO RIGHT");
+        else if (detectedFreq < up + 200)
         {
             Debug.Log("GO UP");
         }
-        else if (detectedFreq > up + 1)
+        else if (detectedFreq > up + 201)
         {
             Debug.Log("GO DOWN");
         }
