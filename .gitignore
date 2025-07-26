@@ -1,0 +1,7 @@
+*
+*/*
+
+!/Assets
+/Assets/*
+!/Assets/scripts/
+!/Assets/scripts/**
