@@ -6,31 +6,102 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float up = 250;
+    
+    [SerializeField] private float speed;
+    
     private PlayerInput playerInput;
     private InputAction moveAction;
+    private Transform transform;
+    [SerializeField] private Tile currTile;
+    
+    private float lerpTime = 0f;
+    private bool isMoving = false;
+    private Vector2 startPos;
+    private Vector2 targetPos;
+    private float targetRot;
+    private float moveSpeed = 5f;
+
 
     void Awake()
     {
 
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
+        transform  = GetComponent<Transform>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        VoicePitchDetector.Instance.OnPitchDetected += VoicePitchDetector_OnPitchDetected;
+        //VoicePitchDetector.Instance.OnPitchDetected += VoicePitchDetector_OnPitchDetected;
+        currTile = TileManager.Instance.GetTile(0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //KeyboardInput();
+        if (!isMoving)
+        {
+            KeyboardInput();
+        }
+            
+        
+        if (isMoving)
+        {
+            
+            lerpTime += Time.deltaTime * moveSpeed;
+            rb.MovePosition(Vector2.Lerp(startPos, targetPos, lerpTime));
+            rb.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, targetRot), lerpTime));
+        
+            if (lerpTime >= 1f)
+            {
+                isMoving = false;
+                rb.position = targetPos;
+                rb.rotation = targetRot;
+            }
+        }
+
     }
     
     private void VoicePitchDetector_OnPitchDetected(object sender, float pitch)
     {
-        Debug.Log(pitch);
+        //Debug.Log(pitch);
+        if (pitch < 100) ;
+        else if (pitch < up)
+        {
+            if (!currTile.bLWall)
+            {
+                rb.MovePosition(new Vector2(currTile.pos.x, currTile.pos.y));
+                currTile = TileManager.Instance.GetTile(currTile.pos.x - 1, currTile.pos.y);
+                Debug.Log("GO LEFT");
+            }
+        }
+        else if (pitch < up + 100)
+        {
+            if (!currTile.bRWall)
+            {
+                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
+                currTile = TileManager.Instance.GetTile(currTile.pos.x + 1, currTile.pos.y);
+                Debug.Log("GO RIGHT");
+            }
+        }
+        else if (pitch < up + 200)
+        {
+            if (!currTile.bUWall)
+            {
+                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
+                currTile = TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y + 1);
+                Debug.Log("GO UP");
+            }
+        }
+        else if (pitch > up + 201)
+        {
+            if (!currTile.bDWall)
+            {
+                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
+                currTile = TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y - 1);
+                Debug.Log("GO DOWN");
+            }
+        }
     }
 
     private void KeyboardInput()
@@ -38,12 +109,48 @@ public class Movement : MonoBehaviour
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
         
         if (moveInput.y > 0) // W
-            rb.position += Vector2.up;
+        {
+            if (!currTile.bUWall)
+            {
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y + 1), 0f);
+                Debug.Log("GO UP");
+            }
+        }
         if (moveInput.x < 0) // A
-            rb.position += Vector2.left;
+        {
+            if (!currTile.bLWall)
+            {
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x - 1, currTile.pos.y), 90f);
+                Debug.Log("GO LEFT");
+            }
+        }
         if (moveInput.x > 0) // D
-            rb.position += Vector2.right;
+        {
+            if (!currTile.bRWall)
+            {
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x + 1, currTile.pos.y), -90f);
+                Debug.Log("GO RIGHT");
+            }
+        }
         if (moveInput.y < 0) // S
-            rb.position += Vector2.down;
+        {
+            if (!currTile.bDWall)
+            {
+                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y - 1), 180f);
+                Debug.Log("GO DOWN");
+            }
+        }
+    }
+
+    private void InitMove(Tile nextTile, float rotation)
+    {
+        startPos = currTile.pos.GetVector();
+        targetPos = nextTile.pos.GetVector();
+        isMoving = true;
+        lerpTime = 0f;
+                
+        targetRot = rotation;
+        currTile = nextTile;
     }
 }
