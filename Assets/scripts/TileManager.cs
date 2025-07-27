@@ -5,6 +5,7 @@ public class TileManager : MonoBehaviour
     public static TileManager Instance { get; private set; }
     [SerializeField] private Tile tile;
     [SerializeField] private Player player;
+    [SerializeField] private GameObject parent;
 
     
     private Tile[,] tiles;
@@ -24,38 +25,88 @@ public class TileManager : MonoBehaviour
 
     private void CreateLevel()
     {
-        tiles = new Tile[10, 10];
-        for (int i = 0; i < 10; i++)
+        int mapSize = 11;
+        tiles = new Tile[mapSize, mapSize];
+        for (int x = 0; x < mapSize; x++)
         {
-            tiles[i, 0] = Instantiate(tile, new Vector3(i, 0, 0), Quaternion.identity);
-            tiles[i, 0].pos.x = i;
-            tiles[i, 0].pos.y = 0;
-
-            switch (i)
+            for (int y = 0; y < mapSize; y++)
             {
-                case 0:
-                    tiles[0, 0].bLWall = true;
-                    tiles[0, 0].bUWall = true;
-                    tiles[0, 0].bDWall = true;
-                    Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
-                    break;
-                case 9:
-                    tiles[9, 0].bRWall = true;
-                    tiles[9, 0].bUWall = true;
-                    tiles[9, 0].bDWall = true;
-                    break;
-                default:
-                    tiles[i, 0].bUWall = true;
-                    tiles[i, 0].bDWall = true;
-                    break;
+                tiles[x, y] = Instantiate(tile,
+                    new Vector3(x, y, 0),
+                    Quaternion.identity,
+                    parent.transform);
+                tiles[x, y].pos.x = x;
+                tiles[x, y].pos.y = y;
+                
+                // LWall
+                if (x == 0)
+                    tiles[x, y].bLWall = true;
+                
+                // RWall
+                if (x == mapSize - 1)
+                    tiles[x, y].bRWall = true;
+                
+                // UWall
+                if (y == mapSize - 1)
+                    tiles[x, y].bUWall = true;
+                
+                // DWall
+                if (y == 0)
+                    tiles[x, y].bDWall = true;
+                
+                // Middle Walls
+                // Upper verticals
+                if (x == 4 && y == 6)
+                {
+                    tiles[x, y].bRWall = true;
+                    tiles[x, y].bDWall = true;
+                }
+                if (x == 5 && y == 6)
+                {
+                    tiles[x, y].bLWall = true;
+                    tiles[x, y].bRWall = true;
+                }
+                if (x == 6 && y == 6)
+                {
+                    tiles[x, y].bLWall = true;
+                    tiles[x, y].bDWall = true;
+                }
+                //horizontals
+                if (x == 4 && y == 5)
+                {
+                    tiles[x, y].bUWall = true;
+                    tiles[x, y].bDWall = true;
+                }
+                if (x == 6 && y == 5)
+                {
+                    tiles[x, y].bUWall = true;
+                    tiles[x, y].bDWall = true;
+                }
+                // Down verticals
+                if (x == 4 && y == 4)
+                {
+                    tiles[x, y].bUWall = true;
+                    tiles[x, y].bRWall = true;
+                }
+                if (x == 5 && y == 4)
+                {
+                    tiles[x, y].bLWall = true;
+                    tiles[x, y].bRWall = true;
+                }
+                if (x == 6 && y == 4)
+                {
+                    tiles[x, y].bLWall = true;
+                    tiles[x, y].bUWall = true;
+                }
             }
         }
+        
+        // Player
+        Instantiate(player, new Vector3(5, 5, 0), Quaternion.identity);
+        player.startingPos = new Vector3(5, 5, 0);
+
     }
 
-    private void Start()
-    {
-        
-    }
     
-    public Tile GetTile(int x, int y) => tiles[x, y];
+    public Tile GetTile(float x, float y) => tiles[(int)x, (int)y];
 }

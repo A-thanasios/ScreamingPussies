@@ -12,8 +12,7 @@ public class Movement : MonoBehaviour
     
     private PlayerInput playerInput;
     private InputAction moveAction;
-    private Transform transform;
-    [SerializeField] private Tile currTile;
+    public Tile currTile;
     
     private float lerpTime = 0f;
     private bool isMoving = false;
@@ -28,13 +27,11 @@ public class Movement : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
-        transform  = GetComponent<Transform>();
     }
 
     void Start()
     {
         //VoicePitchDetector.Instance.OnPitchDetected += VoicePitchDetector_OnPitchDetected;
-        currTile = TileManager.Instance.GetTile(0, 0);
     }
 
     void Update()
@@ -49,8 +46,14 @@ public class Movement : MonoBehaviour
         {
             
             lerpTime += Time.deltaTime * moveSpeed;
-            rb.MovePosition(Vector2.Lerp(startPos, targetPos, lerpTime));
-            rb.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, targetRot), lerpTime));
+            rb.MovePosition(Vector2.Lerp(
+                startPos, 
+                targetPos, 
+                lerpTime));
+            rb.MoveRotation(Quaternion.Lerp(
+                transform.rotation, 
+                Quaternion.Euler(0, 0, targetRot), 
+                lerpTime));
         
             if (lerpTime >= 1f)
             {
@@ -153,4 +156,6 @@ public class Movement : MonoBehaviour
         targetRot = rotation;
         currTile = nextTile;
     }
+
+    public void SetCurrTile(Vector3 vec3) => currTile = TileManager.Instance.GetTile(vec3.x, vec3.y);
 }

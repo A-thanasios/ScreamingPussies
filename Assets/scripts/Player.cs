@@ -1,16 +1,16 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private Movement movement;
+    public Vector3 startingPos;
+    
+    
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        movement = GetComponent<Movement>();
+        movement.SetCurrTile(startingPos);
     }
 }
