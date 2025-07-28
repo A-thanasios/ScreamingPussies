@@ -15,6 +15,9 @@
 
 ## About the Game
 
+<img width="1919" height="1071" alt="Level 1" src="https://github.com/user-attachments/assets/38230915-5fdd-413c-a373-1327b65ad0c5" />
+
+
 **Screaming Pussies** is an experimental Unity game that uses your voice to control a cat lost in a maze. We started to develop this game as a project for Boot.dev Hackathon 2025.
 This unique gaming experience pushes the boundaries of conventional gameplay by incorporating voice-based mechanics that directly respond to the player's voice pitch.
 When we were creating this game, the main idea was fast Fourier transform and its usage. This game leads the player to practice voice pitch regulation and can act as an engaging breathing exercise.
