@@ -10,8 +10,9 @@
 2. Unzip
 3. Enjoy
 
-*Note: Probably you will be confronted by your firewall. Sadly, we haven't found the way around it yet, sorry. :(*
-*Note 2: Just before the time ran out, we found a bug. If cat is not moving, just click on pause and resume again, thanks. :)*
+*Note: You might be confronted with your firewall, sadly we didn't find a way to make it a known app yet, sorry :(*
+*Note 2: Just before the time was about to run out, we found a bug. If the cat is not moving, just click the pause button and resume the game from pause menu, thanks :)*
+
 
 ## About the Game
 
