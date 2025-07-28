@@ -73,11 +73,17 @@ This game is currently in active development. We're continuously working on:
 ## Authors
 
 Making this game was fun!!! Some sneak peaks from behind the scenes.
+Click to see mess and the cat.
 
-###  S7285
-![20250727_212656](https://github.com/user-attachments/assets/15960014-6658-4a0b-8d69-37f817263a98)
-
-### Athanasios
-![20250727_212554](https://github.com/user-attachments/assets/f6b6ee79-d952-4585-b1f9-f11b64141dcc)
+<div align="center">
+  <div style="display: inline-block; text-align: center; margin: 0 10px;">
+    <div><strong>S7285</strong></div>
+    <img src="https://github.com/user-attachments/assets/15960014-6658-4a0b-8d69-37f817263a98" alt="S7285" style="width: 250px; max-width: 100%; height: auto;" />
+  </div>
+  <div style="display: inline-block; text-align: center; margin: 0 10px;">
+    <div><strong>Athanasios</strong></div>
+    <img src="https://github.com/user-attachments/assets/f6b6ee79-d952-4585-b1f9-f11b64141dcc" alt="Athanasios" style="width: 250px; max-width: 100%; height: auto;" />
+  </div>
+</div>
 
 ---
