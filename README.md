@@ -1,5 +1,18 @@
 # Screaming Pussies
 
+## How to run
+
+1. Download with this link:
+   
+   https://www.dropbox.com/scl/fo/1fgpvqr0jyzwucoz1slcx/ACd2FW-bf6AsZhyZCziml-s?rlkey=pfts164dhfetvnfhn8rx1vjdg&st=a9cggmq3&dl=0
+
+   (You can do this without an account, just click the link bellow login form when asked)
+2. Unzip
+3. Enjoy
+
+*Note: Probably you will be confront with your firewall, sadly We didn't find the way how to make it known app yet, sorry :(*
+*Note 2: Just before time runs out, we find a bug. If cat is not moving, just click on pause and resume again, thanks :)*
+
 ## About the Game
 
 **Screaming Pussies** is an experimental Unity game that uses your voice to control a cat lost in a maze. We started to develop this game as a project for Boot.dev Hackathon 2025.
