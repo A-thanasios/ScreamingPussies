@@ -33,10 +33,10 @@ public class ArrowDirectionUI : MonoBehaviour
         float angle = 0;
         switch (direction)
         {
-            case Direction.Up: angle = 0; break;
-            case Direction.Right: angle = -90; break;
-            case Direction.Down: angle = 180; break;
-            case Direction.Left: angle = 90; break;
+            case Direction.Up: angle = -90; break;
+            case Direction.Right: angle = 180; break;
+            case Direction.Down: angle = 90; break;
+            case Direction.Left: angle = 00; break;
         }
 
         arrowImage.rotation = Quaternion.Euler(0, 0, angle);

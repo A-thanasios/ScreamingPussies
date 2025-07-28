@@ -5,7 +5,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private bool hasPlayer;
     [SerializeField] private bool isStart;
-    [SerializeField] private bool isEnd;
+    [SerializeField] public bool isEnd;
     [SerializeField] public bool bUWall;
     [SerializeField] public bool bDWall;
     [SerializeField] public bool bLWall;
@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private SpriteRenderer uWall;
     [SerializeField] private SpriteRenderer dWall;
     [SerializeField] private SpriteRenderer lWall;
-    [SerializeField] private SpriteRenderer rWall;
+    [SerializeField] public SpriteRenderer rWall;
 
     public Position pos;
     

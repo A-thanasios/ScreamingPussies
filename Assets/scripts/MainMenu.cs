@@ -9,11 +9,21 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
-   
-   public void QuitGame()
+
+    public void QuitGame()
     {
         Debug.Log("QUIT!");
         Application.Quit();
+    }
+
+    public void PlayTutorial()
+    {
+        SceneManager.LoadSceneAsync(1);
+    }
+
+    public void PlayLvl1()
+    {
+        SceneManager.LoadSceneAsync(2);
     }
 
 }

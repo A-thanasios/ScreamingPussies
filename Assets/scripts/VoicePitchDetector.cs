@@ -125,7 +125,7 @@ public class VoicePitchDetector : MonoBehaviour
         {
             Debug.Log("GO UP");
         }
-        else if (detectedFreq > up + 201)
+        else if (detectedFreq > up + 201 && detectedFreq < up + 500)
         {
             Debug.Log("GO DOWN");
         }

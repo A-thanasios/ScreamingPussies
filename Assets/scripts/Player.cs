@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Movement movement;
+    public Movement movement;
     public Vector3 startingPos;
     
     

@@ -1,7 +1,9 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -31,14 +33,15 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        //VoicePitchDetector.Instance.OnPitchDetected += VoicePitchDetector_OnPitchDetected;
+        VoicePitchDetector.Instance.OnPitchDetected += VoicePitchDetector_OnPitchDetected;
     }
 
     void Update()
     {
+
         if (!isMoving)
         {
-            KeyboardInput();
+            //KeyboardInput();
         }
             
         
@@ -67,14 +70,14 @@ public class Movement : MonoBehaviour
     
     private void VoicePitchDetector_OnPitchDetected(object sender, float pitch)
     {
+        if (isMoving) return;
         //Debug.Log(pitch);
         if (pitch < 100) ;
         else if (pitch < up)
         {
             if (!currTile.bLWall)
             {
-                rb.MovePosition(new Vector2(currTile.pos.x, currTile.pos.y));
-                currTile = TileManager.Instance.GetTile(currTile.pos.x - 1, currTile.pos.y);
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x - 1, currTile.pos.y), 90f);
                 Debug.Log("GO LEFT");
             }
         }
@@ -82,8 +85,7 @@ public class Movement : MonoBehaviour
         {
             if (!currTile.bRWall)
             {
-                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
-                currTile = TileManager.Instance.GetTile(currTile.pos.x + 1, currTile.pos.y);
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x + 1, currTile.pos.y), -90f);
                 Debug.Log("GO RIGHT");
             }
         }
@@ -91,8 +93,7 @@ public class Movement : MonoBehaviour
         {
             if (!currTile.bUWall)
             {
-                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
-                currTile = TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y + 1);
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y + 1), 0f);
                 Debug.Log("GO UP");
             }
         }
@@ -100,8 +101,7 @@ public class Movement : MonoBehaviour
         {
             if (!currTile.bDWall)
             {
-                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
-                currTile = TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y - 1);
+                InitMove(TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y - 1), 180f);
                 Debug.Log("GO DOWN");
             }
         }
@@ -139,7 +139,6 @@ public class Movement : MonoBehaviour
         {
             if (!currTile.bDWall)
             {
-                rb.MovePosition(new  Vector2(currTile.pos.x, currTile.pos.y));
                 InitMove(TileManager.Instance.GetTile(currTile.pos.x, currTile.pos.y - 1), 180f);
                 Debug.Log("GO DOWN");
             }
@@ -155,6 +154,7 @@ public class Movement : MonoBehaviour
                 
         targetRot = rotation;
         currTile = nextTile;
+        
     }
 
     public void SetCurrTile(Vector3 vec3) => currTile = TileManager.Instance.GetTile(vec3.x, vec3.y);
