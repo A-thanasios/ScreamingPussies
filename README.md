@@ -2,27 +2,29 @@
 
 ## About the Game
 
-**Screaming Pussies** is an experimental Unity game that uses your voice to control a cat lost in the maze. We started to develop this game as a project for Boot.dev Hackathon 2025.
+**Screaming Pussies** is an experimental Unity game that uses your voice to control a cat lost in a maze. We started to develop this game as a project for Boot.dev Hackathon 2025.
 This unique gaming experience pushes the boundaries of conventional gameplay by incorporating voice-based mechanics that directly respond to the player's voice pitch.
-Main idea when we were creating this game was Fourier transform and its usage. Then this game tries to combine utilization of one's breath as he is trying to make the right pitch.
-Ideally this would lead to find the best strategy how to manage your breath and voice. There are various breathing techniques and many of them are leading people to calmness and self-recognition.
-And it is why they are used to help with anxiety. We would like to use this way to increase awareness about anxiety, as many people are confronted with this type of 'disease' that is not a common sadness.
+When we were creating this game, the main idea was fast Fourier transform and its usage. This game leads the player to practice voice pitch regulation and can act as an engaging breathing exercise.
+It aims to motivate players to think about the way work with their voice and breathing, possibly leading them to discover various breathing techniques which help people achieve calmness and self-recognition.
+Thanks to that, those techniques can be helpful to people struggling with anxiety, alleviating immediate symptoms both through breathing exercise and engagement in a fun, captivating activity.
+We would also like to take this opportunity to raise awareness about anxiety, a widespread issue which many people are confronted with.
 
 ## The Concept
 
-This game is intentionally **wild and crazy** - it challenges players to confront their anxieties through unconventional voice-driven gameplay.
-The core mechanic revolves around the relationship between vocal expression and movement of character in the game, creating an immersive experience that's both therapeutic and chaotic (and frustrating).
-You can move in four directions depending on your pitch, that is shown on the screen. There a functioning microphone is needed.
+This game is intentionally **unhinged** - it challenges players to confront their anxieties through unconventional voice-driven gameplay.
+The core mechanic of the game revolves around the relationship between vocal input and the movement of your character, creating an immersive experience that's both therapeutic and chaotic.
+You will move in four directions determined by your pitch as is shown in the instructions on the screen. You will need a functioning microphone.
+
 ## Controls
 
-- **Voice Input**: Primary control method: use your microphone and your *voice* to interact with the game world
+- **Voice Input**: Primary control method: use your *voice* to interact with the game world
 - **Standard Controls**: There are no standard controls to move
-- **Audio Response**: The game responses dynamically to your vocal patterns, volume, and emotional tone
+- **Audio Response**: The game responds dynamically to your vocal expression
 
 ## Objective
 
-The main goal is to navigate through anxiety-inducing scenarios using voice commands and emotional regulation techniques.
-Players must learn to control their vocal responses to progress through increasingly challenging levels that test both their gaming skills and emotional resilience.
+The main goal is to navigate through different scenarios using voice commands and breathing regulation techniques.
+Players must learn to control their vocal responses in order to progress through increasingly challenging levels that test both their gaming skills and emotional resilience.
 
 ## Current Status
 
